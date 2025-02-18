@@ -11,7 +11,7 @@ import SwiftUI
 struct testejsonApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            entradaa()
         }
     }
 }

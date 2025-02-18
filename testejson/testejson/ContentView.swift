@@ -4,9 +4,11 @@ struct ContentView: View {
     
     @StateObject var dados = BaixaDados()
     
+    var casa: House
+    
     var body: some View {
         ZStack{
-            LinearGradient(gradient: Gradient(colors: [.red, .black]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            LinearGradient(gradient: Gradient(colors: [Color(casa.Cor!), .black]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             ScrollView{
                 ZStack{
                     Image("biblioteca")
@@ -15,7 +17,7 @@ struct ContentView: View {
                         .frame(width: 400,height: 200)
                         .padding(.bottom, 120)
                         .opacity(0.5)
-                    Image("grifnoria")
+                   Image(casa.Foto!)
                         .resizable()
                         .scaledToFit()
                         .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
@@ -33,7 +35,8 @@ struct ContentView: View {
                                     .frame(width: 70, height: 70)
                                     .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                             } placeholder: {
-                                ProgressView()
+                                ProgressView().frame(width: 70, height: 70)
+                                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                             }
                             Text(i.name ?? "Desconhecido")
                                 .foregroundColor(.white)
@@ -45,12 +48,12 @@ struct ContentView: View {
                 }
             }//scrollview
         }.onAppear(){
-            dados.fetch()
+            dados.fetch(house: casa.name)
         }
         
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(casa: House(Foto: "grifnoria", Cor: .red, name: "Gryffindor"))
 }

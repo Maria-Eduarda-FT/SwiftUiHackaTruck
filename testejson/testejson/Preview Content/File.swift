@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 struct HaPo: Codable, Identifiable {
     let id: String
@@ -29,20 +30,26 @@ struct Wand: Codable {
     
 }
 
+struct House{
+    let Foto: String?
+    let Cor: Color?
+    let name : String
+}
+
 class BaixaDados : ObservableObject {
     @Published var personagem : [HaPo] = []
     
-    func fetch(){
-        guard let url = URL(string: "https://hp-api.onrender.com/api/characters" ) else{
+    func fetch(house : String){
+        guard let url = URL(string: "https://hp-api.onrender.com/api/characters/house/\(house)" ) else{
             return
         }
-        
         let task = URLSession.shared.dataTask(with: url){ [weak self] data, _, error in
             guard let data = data, error == nil else{
                 return
             }
             do {
                 let parsed = try JSONDecoder().decode([HaPo].self, from: data)
+                
                 DispatchQueue.main.async {
                     self?.personagem = parsed
                 }
