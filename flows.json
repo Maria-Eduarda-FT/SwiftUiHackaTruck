@@ -1,0 +1,221 @@
+[
+    {
+        "id": "b622bd0cea4cb23d",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a9da996dc246b06f",
+        "type": "http response",
+        "z": "b622bd0cea4cb23d",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "10d4fc98fee1561b",
+        "type": "http in",
+        "z": "b622bd0cea4cb23d",
+        "name": "",
+        "url": "/postDuda",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 260,
+        "y": 100,
+        "wires": [
+            [
+                "f67ecc96935371da"
+            ]
+        ]
+    },
+    {
+        "id": "285e32a8c72ba401",
+        "type": "cloudantplus out",
+        "z": "b622bd0cea4cb23d",
+        "name": "",
+        "cloudant": "392aaab49d99e1ed",
+        "database": "banc0dados",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "insert",
+        "x": 510,
+        "y": 100,
+        "wires": [
+            [
+                "a9da996dc246b06f"
+            ]
+        ]
+    },
+    {
+        "id": "6f94f726c27d68ba",
+        "type": "http in",
+        "z": "b622bd0cea4cb23d",
+        "name": "",
+        "url": "/getDados",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 260,
+        "y": 180,
+        "wires": [
+            [
+                "c4cf180d436d6174"
+            ]
+        ]
+    },
+    {
+        "id": "e3a19e02fd439565",
+        "type": "http response",
+        "z": "b622bd0cea4cb23d",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "c4cf180d436d6174",
+        "type": "cloudantplus in",
+        "z": "b622bd0cea4cb23d",
+        "name": "",
+        "cloudant": "392aaab49d99e1ed",
+        "database": "banc0dados",
+        "service": "_ext_",
+        "search": "_all_",
+        "design": "",
+        "index": "",
+        "x": 490,
+        "y": 180,
+        "wires": [
+            [
+                "e3a19e02fd439565"
+            ]
+        ]
+    },
+    {
+        "id": "e81b920ebccf1f62",
+        "type": "http in",
+        "z": "b622bd0cea4cb23d",
+        "name": "",
+        "url": "/delete",
+        "method": "delete",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 260,
+        "y": 260,
+        "wires": [
+            [
+                "9841655ab4237d4a"
+            ]
+        ]
+    },
+    {
+        "id": "156bf3ed8838c2f9",
+        "type": "http response",
+        "z": "b622bd0cea4cb23d",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "7e9d15e94a9cd4a4",
+        "type": "http in",
+        "z": "b622bd0cea4cb23d",
+        "name": "",
+        "url": "/update",
+        "method": "put",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 250,
+        "y": 340,
+        "wires": [
+            [
+                "66e8890686996e3d"
+            ]
+        ]
+    },
+    {
+        "id": "ca80067077b3a294",
+        "type": "http response",
+        "z": "b622bd0cea4cb23d",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "9841655ab4237d4a",
+        "type": "cloudantplus out",
+        "z": "b622bd0cea4cb23d",
+        "name": "",
+        "cloudant": "392aaab49d99e1ed",
+        "database": "banc0dados",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "delete",
+        "x": 490,
+        "y": 260,
+        "wires": [
+            [
+                "156bf3ed8838c2f9"
+            ]
+        ]
+    },
+    {
+        "id": "f67ecc96935371da",
+        "type": "split",
+        "z": "b622bd0cea4cb23d",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 390,
+        "y": 40,
+        "wires": [
+            [
+                "285e32a8c72ba401"
+            ]
+        ]
+    },
+    {
+        "id": "66e8890686996e3d",
+        "type": "cloudantplus out",
+        "z": "b622bd0cea4cb23d",
+        "name": "",
+        "cloudant": "392aaab49d99e1ed",
+        "database": "banc0dados",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "insert",
+        "x": 470,
+        "y": 340,
+        "wires": [
+            [
+                "ca80067077b3a294"
+            ]
+        ]
+    },
+    {
+        "id": "392aaab49d99e1ed",
+        "type": "cloudantplus",
+        "host": "https://f1c0dcf9-5075-4061-a1f8-2f4ca596058a-bluemix.cloudantnosqldb.appdomain.cloud",
+        "name": "Credencial1",
+        "useapikey": true
+    }
+]
