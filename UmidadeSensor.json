@@ -1,0 +1,147 @@
+[
+    {
+        "id": "02a7938303b59ae1",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "71b42e1be153f9d6",
+        "type": "http response",
+        "z": "02a7938303b59ae1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "ec8c09bdd292919b",
+        "type": "http in",
+        "z": "02a7938303b59ae1",
+        "name": "",
+        "url": "/umidadePOST",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 120,
+        "wires": [
+            [
+                "2ab15b38e0a5b650",
+                "aed5819546a8a0c8"
+            ]
+        ]
+    },
+    {
+        "id": "2ab15b38e0a5b650",
+        "type": "cloudantplus out",
+        "z": "02a7938303b59ae1",
+        "name": "",
+        "cloudant": "392aaab49d99e1ed",
+        "database": "banco_dados",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "insert",
+        "x": 520,
+        "y": 100,
+        "wires": [
+            [
+                "71b42e1be153f9d6"
+            ]
+        ]
+    },
+    {
+        "id": "81290af9dee0742c",
+        "type": "http in",
+        "z": "02a7938303b59ae1",
+        "name": "",
+        "url": "/umidadeGET",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 270,
+        "y": 180,
+        "wires": [
+            [
+                "b1d8c512578a67ff"
+            ]
+        ]
+    },
+    {
+        "id": "a00582d0f0c958ee",
+        "type": "http response",
+        "z": "02a7938303b59ae1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b1d8c512578a67ff",
+        "type": "cloudantplus in",
+        "z": "02a7938303b59ae1",
+        "name": "",
+        "cloudant": "392aaab49d99e1ed",
+        "database": "banco_dados",
+        "service": "_ext_",
+        "search": "_all_",
+        "design": "",
+        "index": "",
+        "x": 500,
+        "y": 180,
+        "wires": [
+            [
+                "a00582d0f0c958ee"
+            ]
+        ]
+    },
+    {
+        "id": "d3e055749312363e",
+        "type": "debug",
+        "z": "02a7938303b59ae1",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 360,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "aed5819546a8a0c8",
+        "type": "function",
+        "z": "02a7938303b59ae1",
+        "name": "function 1",
+        "func": "msg.payload = {\n    \"umidade\" : msg.payload.umidade,\n    \"data\" : Date.now()\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 40,
+        "wires": [
+            [
+                "d3e055749312363e"
+            ]
+        ]
+    },
+    {
+        "id": "392aaab49d99e1ed",
+        "type": "cloudantplus",
+        "host": "https://f1c0dcf9-5075-4061-a1f8-2f4ca596058a-bluemix.cloudantnosqldb.appdomain.cloud",
+        "name": "Credencial1",
+        "useapikey": true
+    }
+]
