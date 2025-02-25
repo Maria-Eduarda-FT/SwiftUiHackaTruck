@@ -35,14 +35,21 @@ struct InicioView: View {
                             .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                             .frame(width: 200, height: 200)
                         Spacer()
-                    }
+                    }                        
                     VStack {
-                        ForEach(noticias, id: \.self) { noticia in
-                            Text(noticia.titulo)
-                        }
-                    }//vstack
-                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,maxHeight: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-                    .background().edgesIgnoringSafeArea(.bottom)
+                        VStack{
+                            if let randomNoticia = noticias.randomElement(){
+                                Text("\(randomNoticia.titulo)").font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/).padding().foregroundColor(.white)
+                                Text("\(randomNoticia.texto)").foregroundColor(.white)
+                            }//if
+                        }//vstackdentro
+                        .padding()
+                        .background(Color(.azulCinza))
+                        .cornerRadius(15)
+                        }//vstack
+                        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,maxHeight: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                        .background().edgesIgnoringSafeArea(.bottom)
+                    
                 }//vstackmain
             }//zstack
         }//navstack
