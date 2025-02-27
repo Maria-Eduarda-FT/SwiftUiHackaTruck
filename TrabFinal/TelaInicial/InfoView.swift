@@ -21,6 +21,12 @@ struct InfoView: View {
                 VStack {
                     ZStack {
                         Color.azulCinza.edgesIgnoringSafeArea(.all)
+                        Text("ProtozoAIro")
+                            .font(.system(size: 34, weight: .regular, design: .monospaced))
+                            .font(.title)
+                            .bold()
+                            .padding()
+                            .offset(y: -50)
                         Circle()
                             .foregroundColor(.white)
                             .frame(width: 210, height: 210)
