@@ -11,23 +11,29 @@ struct AnaliseView: View {
         ScrollView {
             ZStack{
                 Color.azulCinza
+                Text("ProtozoAIro")
+                    .font(.system(size: 34, weight: .regular, design: .monospaced))
+                    .font(.title)
+                    .bold()
+                    .padding()
+                    .offset(y: -10)
                 Circle()
                     .foregroundColor(.white)
                     .frame(width: 210, height: 210)
-                    .offset(CGSize(width: 0, height: 120.0))
+                    .offset(CGSize(width: 0, height: 130.0))
                 if let avatarImage = avatarImage {
                     Image(uiImage: avatarImage)
                         .resizable()
                         .scaledToFit()
                         .clipShape(Circle())
                         .frame(width: 250, height: 250)
-                        .offset(CGSize(width: 0, height: 120.0))
+                        .offset(CGSize(width: 0, height: 130.0))
                 } else {
                     Circle()
                         .fill(Color.gray.opacity(0.3))
                         .scaledToFit()
                         .frame(width: 190, height: 190)
-                        .offset(CGSize(width: 0, height: 120.0))
+                        .offset(CGSize(width: 0, height: 130.0))
                 }
             }
             
