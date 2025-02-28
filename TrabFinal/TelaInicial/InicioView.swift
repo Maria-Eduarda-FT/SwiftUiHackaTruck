@@ -8,6 +8,19 @@
 import SwiftUI
 import WebKit
 
+struct SheetView: View {
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        Button("Press to dismiss") {
+            dismiss()
+        }
+        .font(.title)
+        .padding()
+        .background(.black)
+    }
+}
+
 struct GifImageView: UIViewRepresentable {
     private let name: String
     init(_ name: String) {
@@ -33,6 +46,10 @@ struct Noticia: Hashable{
 
 struct InicioView: View {
     @State private var mata = false
+    @State private var showingSheet1 = false
+    @State private var showingSheet2 = false
+    @State private var showingSheet3 = false
+    
     var noticias : [Noticia] =  [
         Noticia(titulo: "Você sabia?", texto: "A malária é causada por parasitas do gênero Plasmodium, que são transmitidos ao ser humano pela picada de mosquitos infectados do gênero Anopheles."),
         Noticia(titulo: "Você sabia?", texto: "A malária tem sido conhecida desde a antiguidade. O termo 'malária' vem do italiano 'mala aria', que significa 'ar ruim', porque os antigos acreditavam que a doença era causada pelo ar de pântanos e áreas alagadas."),
@@ -85,7 +102,13 @@ struct InicioView: View {
                 VStack{
                     VStack {
                         ZStack {
-                            Color.azulCinza.edgesIgnoringSafeArea(.all)
+                            // Color.azulCinza.edgesIgnoringSafeArea(.all)
+                            Text("ProtozoAIro")
+                                .font(.system(size: 34, weight: .regular, design: .monospaced))
+                                .font(.title)
+                                .bold()
+                                .padding()
+                                .offset(y: -50)
                             Circle()
                                 .foregroundColor(.white)
                                 .frame(width: 210, height: 210)
@@ -113,19 +136,68 @@ struct InicioView: View {
                         .frame(height: 200)
                     }//vstack cima
                     .zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
+                    Spacer()
                     VStack {
+                        VStack{}.padding(25)//espaço entre o gif e as notícias
                         VStack{
                             if let randomNoticia = noticias.randomElement(){
                                 Text("\(randomNoticia.titulo)").font(.title).padding().foregroundColor(.white)
                                 Text("\(randomNoticia.texto)").foregroundColor(.white)
                             }//if
-                        }//vstackdentro
+                        }//vstack das noticias somente
                         .padding()
                         .frame(width: 350)
                         .background(Color(.azulCinza))
                         .cornerRadius(15)
+                        //inicio das sheetviews
+                        HStack{
+                            Button {
+                                showingSheet1.toggle()
+                            } label: {
+                                Label("SINTOMAS", systemImage: "drop.fill")
+                                    .font(.system(size: 11))
+                                    .foregroundStyle(.white)
+                                
+                            }
+                            .sheet(isPresented: $showingSheet1) {
+                                Sintomas()
+                            }.frame(width: 100, height: 80)
+                                .background(.azulCinza)
+                                .cornerRadius(10)
+                            Spacer()
+                            
+                            Button {
+                                showingSheet2.toggle()
+                            } label: {
+                                Label("MEDICAMENTOS", systemImage: "cross.vial.fill")
+                                    .font(.system(size: 11))
+                                    .foregroundStyle(.white)
+                                
+                            }
+                            .sheet(isPresented: $showingSheet2) {
+                                Medicamentos()
+                            }.frame(width: 120, height: 80)
+                                .background(.azulCinza)
+                                .cornerRadius(10)
+                            Spacer()
+                            
+                            Button {
+                                showingSheet3.toggle()
+                            } label: {
+                                Label("ESTATISTICA", systemImage: "chart.line.uptrend.xyaxis")
+                                    .font(.system(size: 11))
+                                    .foregroundStyle(.white)
+                            }
+                            .sheet(isPresented: $showingSheet3) {
+                                SheetView()
+                            }.frame(width: 100, height: 80)
+                                .background(.azulCinza)
+                                .cornerRadius(10)
+                        }.padding()
+                        //termino das sheet views
+                        
                     }//vstack baixo
-                    .frame(maxWidth: .infinity/*@END_MENU_TOKEN@*/,maxHeight: /*@START_MENU_TOKEN@*/.infinity)
+                    .frame(maxWidth: .infinity,maxHeight: .infinity)
                     .background().edgesIgnoringSafeArea(.bottom)
                     
                 }//vstackmain
