@@ -35,6 +35,23 @@ struct InfoView: View {
                     .frame(height: 200)
                 }
                 Spacer()
+                VStack{
+                        Text("Maneiras de Combater a Malária...")
+                        .font(.title2)
+                        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
+                        .padding(10)
+                    HStack{
+                        Image(systemName: "ant")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 60, height: 70)
+                            .padding(10)
+                        
+                            Text("As principais medidas de prevenção da malária são o uso de mosquiteiros, roupas que protejam pernas e braços, telas em portas e janelas e uso de repelentes.")
+                            .padding(10)
+                    }.background(Color(.azulEscuro)).cornerRadius(15)
+                }.padding()
+                Spacer()
                 YouTubeView(videoId: id)
                     .cornerRadius(15)
                     .frame(width: 350, height: 250)
@@ -42,7 +59,7 @@ struct InfoView: View {
                 Spacer()
                 
             }
-            }
+        }
     }
 }
 
